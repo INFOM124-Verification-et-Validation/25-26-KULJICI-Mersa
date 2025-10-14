@@ -2,8 +2,12 @@ package nl.tudelft.jpacman.board;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+import nl.tudelft.jpacman.sprite.Sprite;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
+import java.util.ArrayList;
+import java.util.EnumMap;
 
 /**
  * Test suite to confirm that {@link Unit}s correctly (de)occupy squares.
@@ -31,7 +35,7 @@ class OccupantTest {
      */
     @Test
     void noStartSquare() {
-        // TODO
+        assertThat(unit.hasSquare()).isEqualTo(false);
     }
 
     /**
@@ -40,7 +44,10 @@ class OccupantTest {
      */
     @Test
     void testOccupy() {
-        // TODO
+        Square square = new BasicSquare();
+        unit.occupy(square);
+        assertThat(unit.getSquare()).isEqualTo(square);
+        assertThat(square.getOccupants().contains(unit)).isEqualTo(true);
     }
 
     /**
@@ -49,6 +56,10 @@ class OccupantTest {
      */
     @Test
     void testReoccupy() {
-        // TODO
+        Square square = new BasicSquare();
+        unit.occupy(square);
+        unit.occupy(square);
+        assertThat(unit.getSquare()).isEqualTo(square);
+        assertThat(square.getOccupants().contains(unit)).isEqualTo(true);
     }
 }
